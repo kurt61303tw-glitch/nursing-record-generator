@@ -267,6 +267,7 @@
     .validation-alert strong{display:block;font-size:18px}.validation-alert ul{margin:6px 0 0;padding-left:24px}.field.is-invalid input,.field.is-invalid select,.field.is-invalid textarea{border:3px solid #b5472f;box-shadow:0 0 0 4px rgba(181,71,47,.19)}
     .success-notice{position:fixed;left:50%;top:50%;z-index:100;padding:18px 24px;border-radius:14px;background:#1f5b43;color:#fff;box-shadow:0 16px 36px rgba(24,65,49,.32);font-size:19px;font-weight:750;transform:translate(-50%,-50%)}
     .music-control{display:flex;align-items:center;gap:9px}.music-toggle{border:2px solid #fff;border-radius:9px;background:#b94618;color:#fff;padding:9px 13px;font:inherit;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(74,23,6,.32)}.music-toggle:hover{background:#8f3412}.music-toggle[aria-pressed="true"]{background:#1f5b43}.music-volume{display:flex;align-items:center;gap:6px;padding:7px 9px;border:1px solid rgba(255,255,255,.46);border-radius:9px;background:rgba(57,32,18,.36);color:#fff;font-size:14px;font-weight:750}.music-volume input{width:84px;accent-color:#ffb25b;cursor:pointer}
+    .app-version{position:fixed;right:18px;bottom:12px;z-index:8;margin:0;color:var(--moss);font-size:13px;line-height:1.35;letter-spacing:.02em;pointer-events:none}
     .grid > .field.conditional-slot.hidden{display:flex!important;visibility:hidden;pointer-events:none}#admissionHospitalWrap.hidden,#admissionReferralWrap.hidden,#dietWrap.hidden,#dietNoteWrap.hidden,#tubeSizeWrap.hidden,#tubeDateWrap.hidden,#otherTubesWrap.hidden,#otherTubesDateWrap.hidden,#edemaSiteWrap.hidden{display:none!important;visibility:visible;pointer-events:auto}
     .btn-primary{background:linear-gradient(135deg,var(--maple),var(--leaf));color:#fff;box-shadow:0 7px 16px rgba(181,68,27,.2)}
     .btn-primary:hover{filter:saturate(1.08) brightness(.97);transform:translateY(-1px)}
@@ -297,7 +298,7 @@
     }
     @media print{
       body{background:#fff}
-      body::before,.topbar,.mode-switch,.form-panel,.preview-actions,.status{display:none!important}
+      body::before,.topbar,.mode-switch,.form-panel,.preview-actions,.status,.app-version{display:none!important}
       .app-shell{padding:0}
       .workspace{display:block}
       .preview-panel{border:0;box-shadow:none}
@@ -428,6 +429,7 @@
       </aside>
     </div>
   </main>
+  <p class="app-version" aria-label="版本日期：115年08月22日">版本日期：115/08/22</p>
 
   <script>
     const $ = id => document.getElementById(id);

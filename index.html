@@ -415,7 +415,7 @@
     .ai-uncertainty-label.is-suggest{color:#1f6b66}
     .ai-uncertainty-val.is-reason{color:#922d14;font-weight:700}
     .ai-uncertainty-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);flex-wrap:wrap}
-    .field.field-needs-check{border:2px dashed #d56f22 !important;background:#fffaf4 !important;border-radius:12px;padding:6px;animation:ai-field-pulse 2.2s infinite ease-in-out}
+    .field.field-needs-check{border:2px dashed #d56f22 !important;background:#fffaf4 !important;border-radius:12px;padding:6px;animation:ai-field-pulse 2.2s infinite ease-in-out}.field-uncertain-badge{margin:10px 0 2px;padding:9px 11px;border:1.5px solid #c9362b;border-radius:8px;background:#fff0ef;color:#a61b15;font-size:15px;font-weight:800;line-height:1.5}.field-uncertain-badge strong{color:#8f1712;font-weight:900}
     @keyframes ai-field-pulse{0%, 100%{box-shadow:0 0 0 0 rgba(213,111,34,.35)}50%{box-shadow:0 0 0 6px rgba(213,111,34,0)}}
     .ai-uncertainty-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 16px;padding:12px 16px;border-radius:12px;background:#fff5eb;border:1.5px solid #f0a868;box-shadow:0 3px 10px rgba(163,66,18,.08)}
     .ai-uncertainty-banner-icon{font-size:22px;flex:none}
@@ -725,7 +725,7 @@
                   </span>
                 </div>
               </div>
-              <textarea id="medications" data-validation-label="口服藥內容" data-optional placeholder="格式範例：【成大醫院 心臟內科】Bokey 100mg 1顆 PO QD、Madopar 250mg 半顆 PO TID、Secorin syrup 5ml PO TID、Forlax 10g 1包 PO QD、Acetaminophen 500mg 1顆 Q12H PO 7天份。若無口服藥請填無"></textarea>
+              <textarea id="medications" data-validation-label="口服藥內容" data-optional placeholder="格式範例：成大醫院 心臟內科 Bokey 100mg 1顆 PO QD、Madopar 250mg 半顆 PO TID、Secorin syrup 5ml PO TID、Forlax 10g 1包 PO QD、Acetaminophen 500mg 1顆 Q12H PO 7天份。若無口服藥請填無"></textarea>
             </div>
             <div class="field"><label for="medDays">口服藥天數 <span class="hint">（選填）</span></label><input id="medDays" data-optional placeholder="輸入數字即可"></div>
             <div class="field"><label for="followUp">回診日期與科別 <span class="hint">（選填）</span></label><input id="followUp" data-optional placeholder="例如：115／08／15 心臟內科；無安排回診"></div>
@@ -743,9 +743,9 @@
 
             <details><summary class="guide-toggle">✨ 各欄位專屬 AI 智慧提煉（交班故事連貫敘事、出院診斷含數值、用藥防呆）</summary><div class="guide-content"><p>在「病況描述／交班重點」、「疾病／病史」、「口服藥內容」欄位旁，均設有「✨ 專屬 AI」按鈕：</p><ul><li><strong>專屬運作保證</strong>：僅會分析並填入該單一目標欄位，與全域 AI 及其他表單欄位互不相通，絕不影響或覆寫其他欄位。</li><li><strong>病況描述／交班重點（無標題、不條列、故事化連貫敘事）</strong>：開頭<strong>絕對無「標題：」或「病況描述：」前綴</strong>；專注於臨床核心重點，<strong>不寫姓名年齡、不用條列式、不分段換行</strong>，融合成一篇通順流暢的連貫故事段落。</li><li><strong>疾病／病史（出院診斷呈現與檢驗數值保留）</strong>：若資料來源確定只有出院診斷，<strong>直接以「出院診斷：1. 2. 3.」呈現</strong>，不強行硬拆主要與過去病史；若有明確佐證區分才分流；<strong>若附有重要臨床檢驗數值（高血鈉 Na 156、低血鉀 K 2.8、Cr 3.2 等），絕對 100% 完整保留</strong>。</li><li><strong>專業名詞中英文規範（清爽不雜亂原則）</strong>：常見簡單疾病（如高血壓、糖尿病、骨折等）<strong>一律不附英文</strong>；少見特殊診斷（如 AMI、BPH、VVS、PEG 等）若 3 個不夠可<strong>視情況彈性增加</strong>，以幫助同仁學習臨床新知並保持紀錄整潔。</li><li><strong>離題防呆機制</strong>：若上傳內容與該欄位主題差距過大（如生活雜談），AI 將發揮臨床專業斟酌不予帶入。</li></ul></div></details>
 
-            <details><summary class="guide-toggle">💊 口服藥內容與各類劑型（膠囊、錠劑、水劑、粉劑）長照標準化書寫與天數防呆</summary><div class="guide-content"><p>為符合長照機構臨床給藥安全與 AI 辨識標準，用藥內容採以下標準化規範：</p><ul><li><strong>呈現時藥物前面除了科別，也要有醫院名稱</strong>：格式嚴格標準化為【醫院 科別】分組呈現（例如：<code>【成大醫院 心臟內科】Bokey 100mg 1顆 PO QD、Madopar 250mg 半顆 PO TID</code>），不可只有科別。</li><li><strong>各類劑型長照標準化書寫單位</strong>：<ul><li>💊 <strong>錠劑 / 圓形顆粒 (Tablets / Pills)</strong>：註明規格與每次服用「顆」或「粒」（如 <code>Bokey 100mg 1顆 PO QD</code>）。</li><li>💊 <strong>膠囊劑 (Capsules)</strong>：註明規格與每次「顆」或「粒」（如 <code>Cephalexin 500mg 1顆 PO QID</code>）。</li><li>🧪 <strong>水劑 / 藥水 / 糖漿 / 懸浮液 (Syrup / Solution / Susp)</strong>：<strong>【水劑絕對不可寫「顆」】</strong>，一律以容量 <strong>「ml（毫升）」</strong> 或 <strong>「滴 (gtt)」</strong> 書寫（如 <code>Secorin syrup 5ml PO TID</code>、<code>Kaopectate susp 10ml PO TID PRN</code>）。</li><li>📦 <strong>粉劑 / 散劑 / 發泡包 (Powder / Granules / Sachet)</strong>：一律以 <strong>「包」</strong> 書寫（如 <code>Forlax 10g 1包 PO QD</code>、<code>Bacid powder 1包 PO TID</code>）。</li><li>💨 <strong>吸入 / 貼片 / 塞劑 / 胰島素</strong>：吸入劑標 <code>puff（揿）</code>、貼片標 <code>片</code>、塞劑標 <code>顆/條</code>、胰島素標 <code>u（單位）</code>。</li></ul></li><li><strong>排版不用條列式，直接以頓號「、」間隔</strong>：所有口服藥物嚴禁以換行或 1. 2. 3. 條列式呈現，一律在同一個段落中直接以「、」連接。</li><li><strong>開立天數 vs 發放總顆數防呆（如 14天 vs 28顆清楚辨識）</strong>：例如 1# BID 開立 14 天共發放 28 顆（28tab），<strong>實際開立天數為 14 天</strong>！AI 具備智慧防呆，精準抓取 14 天填入 medDays，絕不誤把 28 顆當成 28 天。</li><li><strong>少數短天數藥物註記（無括號）</strong>：僅少數開立天數較短的藥物（如止痛退燒 7 天，短於基準最長 14 天），才直接在藥品後方註記（例如：<code>Acetaminophen 500mg 1顆 Q12H PO 7天份</code>），<strong>少數天數後面不用括號「（）」呈現</strong>，避免視覺雜亂。</li></ul></div></details>
+            <details><summary class="guide-toggle">💊 口服藥內容與各類劑型（膠囊、錠劑、水劑、粉劑）長照標準化書寫與天數防呆</summary><div class="guide-content"><p>為符合長照機構臨床給藥安全與 AI 辨識標準，用藥內容採以下標準化規範：</p><ul><li><strong>用藥書寫簡潔呈現（不需醫院科別分組）</strong>：若佐證資料有醫院與科別，藥物前方保留醫院與科別名稱（不加【】符號，例如：<code>成大醫院 心臟內科 Bokey 100mg 1顆 PO QD、Madopar 250mg 半顆 PO TID</code>；若無則直接列出藥名），簡潔俐落。</li><li><strong>各類劑型長照標準化書寫單位</strong>：<ul><li>💊 <strong>錠劑 / 圓形顆粒 (Tablets / Pills)</strong>：註明規格與每次服用「顆」或「粒」（如 <code>Bokey 100mg 1顆 PO QD</code>）。</li><li>💊 <strong>膠囊劑 (Capsules)</strong>：註明規格與每次「顆」或「粒」（如 <code>Cephalexin 500mg 1顆 PO QID</code>）。</li><li>🧪 <strong>水劑 / 藥水 / 糖漿 / 懸浮液 (Syrup / Solution / Susp)</strong>：<strong>【水劑絕對不可寫「顆」】</strong>，一律以容量 <strong>「ml（毫升）」</strong> 或 <strong>「滴 (gtt)」</strong> 書寫（如 <code>Secorin syrup 5ml PO TID</code>、<code>Kaopectate susp 10ml PO TID PRN</code>）。</li><li>📦 <strong>粉劑 / 散劑 / 發泡包 (Powder / Granules / Sachet)</strong>：一律以 <strong>「包」</strong> 書寫（如 <code>Forlax 10g 1包 PO QD</code>、<code>Bacid powder 1包 PO TID</code>）。</li><li>💨 <strong>吸入 / 貼片 / 塞劑 / 胰島素</strong>：吸入劑標 <code>puff（揿）</code>、貼片標 <code>片</code>、塞劑標 <code>顆/條</code>、胰島素標 <code>u（單位）</code>。</li></ul></li><li><strong>排版不用條列式，直接以頓號「、」間隔</strong>：所有口服藥物嚴禁以換行或 1. 2. 3. 條列式呈現，一律在同一個段落中直接以「、」連接。</li><li><strong>開立天數 vs 發放總顆數防呆（如 14天 vs 28顆清楚辨識）</strong>：例如 1# BID 開立 14 天共發放 28 顆（28tab），<strong>實際開立天數為 14 天</strong>！AI 具備智慧防呆，精準抓取 14 天填入 medDays，絕不誤把 28 顆當成 28 天。</li><li><strong>少數短天數藥物註記（無括號）</strong>：僅少數開立天數較短的藥物（如止痛退燒 7 天，短於基準最長 14 天），才直接在藥品後方註記（例如：<code>Acetaminophen 500mg 1顆 Q12H PO 7天份</code>），<strong>少數天數後面不用括號「（）」呈現</strong>，避免視覺雜亂。</li></ul></div></details>
 
-            <details><summary class="guide-toggle">📝 完整護理紀錄「✨ 整理優化內容」功能（保留完整架構、語句與全形標點修飾、彈性中英、重新優化）</summary><div class="guide-content"><p>在產生右側護理紀錄後，可點擊「✨ 整理優化內容」按鈕進行臨床專業潤飾：</p><ul><li><strong>嚴格保留原有結構與規則（絕不混打成一團）</strong>：優化功能專注於「修飾語句順暢、全形標點符號標準化（，、。；）」，嚴格保持原始紀錄中基本資料、病況歷程、生命徵象、意識肌力、管路、診斷史、用藥分組與結論之完整清晰架構，絕不顛倒次序或強行混縮成雜亂文字。</li><li><strong>增設「🔄 重新優化」按鈕</strong>：若覺得第一次產出的潤飾語感不夠理想，可直接在彈窗下方點擊「🔄 重新優化」按鈕，系統會即時重新呼叫 AI 再次進行潤飾，隨時產出全新版本！</li><li><strong>專業名詞中英文對照規範（清爽不雜亂為原則）</strong>：專有名詞較多時，少見特殊病（如 AMI、BPH、VVS、PEG 等）3 個不夠可彈性增加，常見病（高血壓、糖尿病、骨折等）則保持純中文防雜亂；若紀錄中很少特殊名詞時，亦可彈性為常見病（如高血壓、糖尿病等）附上英文縮寫，始終維持護理紀錄清爽乾淨。</li><li><strong>持久化保存（跳出視窗內容依然在）</strong>：若不小心點擊背景關閉視窗，優化產出的內容會自動保留在暫存中，再次點開時內容依然在，手動修改文字亦會被記住，避免重跑浪費時間。若不想採用優化成果，直接點擊右上角「×」關閉即可。</li><li><strong>100% 絕對保留所有客觀事實與數據</strong>：姓名、生命徵象數據、GCS、肌力、檢驗數值、管路、藥品與結論，嚴格 100% 完整保留。</li></ul></div></details>
+            <details><summary class="guide-toggle">📝 完整護理紀錄「✨ 整理優化內容」功能（大區塊空行間隔排版、語句修飾與標點標準化、彈性中英、重新優化）</summary><div class="guide-content"><p>在產生右側護理紀錄後，可點擊「✨ 整理優化內容」按鈕進行臨床專業潤飾：</p><ul><li><strong>各大區塊標準空行間隔（雙換行排版）</strong>：優化功能專注於「修飾語句順暢、全形標點符號標準化（，、。；）」，並將基本評估、病況歷程故事、出院診斷換行條列、口服藥物、回診安排與結論處置以標準空行（雙換行）清楚間隔，層次分明、排版舒適，便於長照交班與評鑑查核。</li><li><strong>增設「🔄 重新優化」按鈕</strong>：若覺得第一次產出的潤飾語感不夠理想，可直接在彈窗下方點擊「🔄 重新優化」按鈕，系統會即時重新呼叫 AI 再次進行潤飾，隨時產出全新版本！</li><li><strong>專業名詞中英文對照規範（清爽不雜亂為原則）</strong>：專有名詞較多時，少見特殊病（如 AMI、BPH、VVS、PEG 等）3 個不夠可彈性增加，常見病（高血壓、糖尿病、骨折等）則保持純中文防雜亂；若紀錄中很少特殊名詞時，亦可彈性為常見病（如高血壓、糖尿病等）附上英文縮寫，始終維持護理紀錄清爽乾淨。</li><li><strong>持久化保存（跳出視窗內容依然在）</strong>：若不小心點擊背景關閉視窗，優化產出的內容會自動保留在暫存中，再次點開時內容依然在，手動修改文字亦會被記住，避免重跑浪費時間。若不想採用優化成果，直接點擊右上角「×」關閉即可。</li><li><strong>100% 絕對保留所有客觀事實與數據</strong>：姓名、生命徵象數據、GCS、肌力、檢驗數值、管路、藥品與結論，嚴格 100% 完整保留。</li></ul></div></details>
 
             <details><summary class="guide-toggle">🧠 GCS 意識評估填寫參考</summary><div class="guide-content"><p>格拉斯哥昏迷指數評估標準：</p><ul><li><strong>E（睜眼反應）</strong>：E4 主動睜眼、E3 聽到呼喚睜眼、E2 疼痛刺激睜眼、E1 對刺激無反應；EC 表示眼部外力阻止睜開（如水腫）。</li><li><strong>V（言語反應）</strong>：V5 說話有條理、V4 可應答但無邏輯、V3 可說單字胡言亂語、V2 可發出聲音、V1 無任何反應；VT 氣切無法發聲；VE 插管無法發聲；VA 失語症。</li><li><strong>M（運動反應）</strong>：M6 依指令動作、M5 定位並移除疼痛刺激、M4 正常屈曲回縮、M3 不正常屈曲、M2 伸展僵硬、M1 無反應。</li></ul></div></details>
 
@@ -755,7 +755,7 @@
 
             <details><summary class="guide-toggle">🎵 背景放鬆音樂播放器</summary><div class="guide-content"><p>工作時的舒緩音樂輔助：</p><ul><li>支援個人化音樂曲目播放與自由音量調節，貼心記住您的音量偏好，提升日常護理文書專注力與好心情。</li></ul></div></details>
 
-            <details><summary class="guide-toggle">🔒 資料安全與金鑰管理防護保證（密碼鎖定與防暴力破解）</summary><div class="guide-content"><p>住民隱私與金鑰安全管理：</p><ul><li><strong>設定金鑰專屬密碼防護與防暴力破解</strong>：為保護機構專屬 API Key 不被未授權人員隨意查閱或竄改，「設定 API Key」按鈕設有管理安全密碼保護，並具備階梯式防暴力破解鎖定機制（連續輸錯 3 次鎖定 60 秒、連續輸錯 5 次鎖定 5 分鐘），即使重整頁面亦受保護，確保金鑰隱私安全無虞。</li><li><strong>本機端運作保證</strong>：本工具為純前端可攜式 HTML 檔案，所有表單資料與暫存均保留在您的本機電腦瀏覽器中，無任何第三方商業資料庫後門儲存。</li><li><strong>API Key 自主保存</strong>：您的 Google Gemini API Key 安全儲存於本機瀏覽器 LocalStorage，可隨時更換或一鍵清除。</li></ul></div></details>
+            <details><summary class="guide-toggle">🔒 資料安全與金鑰管理說明（密碼鎖定防護）</summary><div class="guide-content"><p>住民隱私、金鑰管理與臨床覆核說明：</p><ul><li><strong>設定金鑰專屬密碼防護</strong>：為保護機構設定介面不被未授權人員隨意開啟，「設定 API Key」按鈕設有安全密碼保護，並具備防暴力測試鎖定機制（連續輸錯 3 次鎖定 60 秒、連續輸錯 5 次鎖定 5 分鐘）。</li><li><strong>金鑰本機儲存與共用提醒</strong>：若使用者自行設定 AI 金鑰，金鑰僅儲存在目前瀏覽器；請勿在共用電腦或公開裝置儲存金鑰。使用完畢可於設定中點擊「清除已存金鑰」。</li><li><strong>本機端資料處理原則</strong>：本工具為純前端可攜式 HTML 檔案，所有表單資料與暫存均保留在您的本機電腦瀏覽器中，無任何第三方商業資料庫後門儲存。</li><li><strong>AI 輔助與人工覆核提醒</strong>：啟用 AI 分析時，上傳的文件或貼上文字會傳送至您設定的 AI 服務進行處理。辨識結果僅供整理參考，護理人員仍須依原始文件、機構 SOP 與實際評估逐項核對後再使用。</li></ul></div></details>
           </div></dialog>
 
       <!-- 全域 AI 智慧輔助彈窗 (Global AI Modal) -->
@@ -778,7 +778,7 @@
           <div class="ai-notice-banner" role="alert" aria-label="隱私保護與核對叮嚀">
             <span class="ai-notice-icon">🛡️</span>
             <div class="ai-notice-body">
-              <span class="ai-notice-badge">小叮嚀</span>拍照時建議可<span class="ai-notice-hl">遮蔽身分證字號與姓名以保護個資</span>。辨識完成後<span class="ai-notice-hl">請核對各項資訊</span>。
+              <span class="ai-notice-badge">臨床提醒</span>拍照時建議可<span class="ai-notice-hl">遮蔽身分證字號與姓名保護個資</span>。辨識結果僅供整理參考，護理人員仍須依原始文件、機構 SOP 與實際評估逐項核對後再使用。
             </div>
           </div>
 
@@ -890,6 +890,9 @@
                 <li>點擊「儲存金鑰」，瀏覽器會自動保存於本機，單位同事打開即用、免重複輸入！</li>
               </ol>
             </div>
+            <div style="margin:12px 0 0;padding:8px 12px;background:#fff8e6;border:1px solid #f2c779;border-radius:6px;font-size:13px;color:#7a4b04;line-height:1.5;">
+              ⚠️ <strong>資安提醒</strong>：若自行設定 AI 金鑰，金鑰僅儲存在目前瀏覽器；請勿在共用電腦或公開裝置儲存金鑰。使用完畢可於下方點擊「清除已存金鑰」。
+            </div>
             <div class="ai-key-dialog-footer">
               <button type="button" class="btn btn-outline" id="aiKeyClearBtn">清除已存金鑰</button>
               <button type="button" class="btn btn-primary" id="aiKeySaveBtn">儲存金鑰</button>
@@ -945,8 +948,8 @@
           </div>
 
           <div class="field-ai-decoupled-notice">
-            <span class="field-ai-notice-badge">🔒 專屬運作保證</span>
-            <div><strong>本功能為專屬 AI 分析：</strong>僅會分析並填入<span id="fieldAiTargetFieldName" class="field-ai-target-hl">【病況描述／交班重點】</span>，與全域 AI 及其他表單欄位<strong>完全互不相通</strong>，絕不覆寫或改動其他任何已填資料！</div>
+            <span class="field-ai-notice-badge">🔒 專屬運作設計</span>
+            <div><strong>本功能為專屬 AI 分析：</strong>僅會分析並填入<span id="fieldAiTargetFieldName" class="field-ai-target-hl">【病況描述／交班重點】</span>，與全域 AI 及其他表單欄位<strong>完全互不相通</strong>，原則上不改動其他已填資料。辨識結果僅供整理參考，護理人員仍須依原始文件逐項核對後再使用。</div>
           </div>
 
           <!-- 簡單提醒：可同時上傳檔案+文字描述一起產出內容 -->
@@ -1021,6 +1024,10 @@
         <div class="preview-body"><div class="record-paper" id="recordPreview">請先填寫住民姓名、紀錄日期與時間，以及其他紀錄後再按下「確認護理紀錄有無完整性」。</div></div>
         <div class="preview-actions">
           <button class="btn btn-outline btn-ai-optimize" id="optimizeRecordBtn" type="button" disabled title="點擊透過 AI 智慧整理優化護理紀錄語句流暢度與排版">✨ 整理優化內容</button>
+          <span class="ai-outer-progress hidden" id="optimizeOuterProgress" aria-live="polite">
+            <span class="ai-outer-spinner"></span>
+            <span class="ai-outer-pct" id="optimizeOuterPct">0%</span>
+          </span>
           <button class="btn btn-outline" id="copyBtn" type="button" disabled>複製紀錄</button>
           <button class="btn btn-primary" id="wordBtn" type="button" disabled>下載 Word</button>
         </div>
@@ -1040,7 +1047,7 @@
             <div class="optimize-notice-box">
               <span class="ai-notice-icon">🛡️</span>
               <div class="optimize-notice-text">
-                <strong>長照護理紀錄專業潤飾：</strong>優化語意流暢度、通順連貫性與專業標點，<strong>【100% 絕對保留所有客觀事實、數據、生命徵象、日期與醫囑】</strong>，絕不擅自刪改或捏造。
+                <strong>長照護理紀錄專業潤飾：</strong>優化語意流暢度、通順連貫性與專業標點，<strong>【嚴格維持原始客觀數據、生命徵象呈現方式（保持未優化模式）、日期與醫囑架構】</strong>。潤飾結果僅供文字整理參考，護理人員仍須依實際評估逐項核對後再使用。
               </div>
             </div>
             <div class="optimize-diff-grid">
@@ -1054,7 +1061,17 @@
               <div class="optimize-diff-col is-polished">
                 <div class="optimize-col-head">
                   <strong>✨ AI 整理優化後紀錄</strong>
-                  <span class="optimize-col-badge is-highlight">潤飾完成（可自由編輯）</span>
+                  <span class="optimize-col-badge is-highlight" id="optimizeColBadge">潤飾完成（可自由編輯）</span>
+                  <span class="ai-outer-progress hidden" id="optimizeInnerProgress" aria-live="polite" style="margin-left:auto">
+                    <span class="ai-outer-spinner"></span>
+                    <span class="ai-outer-pct" id="optimizeInnerPct">0%</span>
+                  </span>
+                </div>
+                <div class="ai-progress-container hidden" id="optimizeProgressContainer" style="margin:6px 0 10px;">
+                  <div class="ai-progress-track">
+                    <div class="ai-progress-fill" id="optimizeProgressBar" style="width:0%;"></div>
+                  </div>
+                  <span class="ai-progress-percent" id="optimizeProgressPercent">0%</span>
                 </div>
                 <textarea class="optimize-textarea" id="optimizePolishedText" placeholder="AI 正在整理優化內容..."></textarea>
               </div>
@@ -1092,6 +1109,8 @@
     const cleanMedicationString = str => {
       if (!str || typeof str !== 'string') return str;
       return str
+        // 0. 去除口服藥【醫院 科別】等分組標記，直接呈現藥物清單
+        .replace(/【([^】]+)】\s*/g, '$1 ')
         // 1. 處理 0.5# / 半# / 1/2# / 0.5 tab / 1/2 tab -> 半顆
         .replace(/(?:0\.5|1\/2|半)\s*(?:#|(?:tabs?|caps?|pills?|錠|顆|粒)\b)/gi, '半顆')
         .replace(/\b(?:0\.5|1\/2)\s*顆/g, '半顆')
@@ -1201,7 +1220,7 @@
     const buildRecordWithImmediateIsolation=buildRecord;
     buildRecord=()=>{ const record=buildRecordWithImmediateIsolation(); const room=fieldValue('isolationRoom'),days=text('observationDays'); return room&&!days?record.replace(/。$/,`；安排轉至${room}。`):record; };
     const buildRecordWithFocus=buildRecord;
-    buildRecord=()=>buildRecordWithFocus().replace(/^([^\n]*【(?:新入住|出院)】)/,'護理焦點：$1');
+    buildRecord=()=>buildRecordWithFocus();
     const buildRecordWithoutOtherExam=buildRecord;
     buildRecord=()=>{ const record=buildRecordWithoutOtherExam(); if(state.mode!=='new'||$('admissionExam').value!=='其他') return record; const note=text('admissionExamNote'); return record.replace(`入住體檢其他${note?`（${note}）`:''}`,`入住體檢${note?`（${note}）`:''}`); };
     const buildRecordWithoutOtherSupply=buildRecord;
@@ -1218,7 +1237,7 @@
     buildRecord=()=>{ const record=buildRecordWithWeightPrompt(); return fieldValue('weightStatus')==='已量測'&&!text('weight')?record.replace(/。$/,'；量測體重：。'):record; };
     const buildRecordWithoutOtherDuplicates=buildRecord;
     buildRecord=()=>{ let record=buildRecordWithoutOtherDuplicates(); const collapseOther=(id,prefix,noteId)=>{ if($(id)?.value!=='其他') return; const value=fieldValue(id),note=text(noteId); const duplicated=`${prefix}${value}${note?`（${note}）`:''}`; const replacement=`${prefix}${note?`（${note}）`:''}`; record=record.replace(duplicated,replacement); }; collapseOther('admissionExam','入住體檢','admissionExamNote'); collapseOther('supplySource','衛生耗材','supplySourceNote'); return record; };
-    function buildRecordClean(){ const c=common(); const raw=id=>String($(id)?.value||''); const other=id=>String($(id)?.parentElement.querySelector('[data-other-input]')?.value||'').trim(); const choice=id=>raw(id)==='其他'?other(id):fieldValue(id); const companion=id=>{ const value=choice(id); return value?`由${value.replace(/^由/,'').replace(/陪同$/,'').trim()}陪同`:''; }; const weightStatus=choice('weightStatus'),room=choice('isolationRoom'); const weight=weightStatus==='已量測'?`量測體重：${c.weight?`${c.weight}公斤`:''}`:weightStatus==='未量測'?'未量測體重':''; const isolation=room?`安排轉至${room}${c.observationDays?`留觀 * ${c.observationDays}天`:''}`:''; const respiratory=choice('respiratory'); const breathing=respiratory&&respiratory!=='無使用呼吸輔助器'?`使用${respiratory}${c.venturiPercent?` ${c.venturiPercent}`:''}${c.oxygen?` ${c.oxygen}`:''}`:''; const feedingRaw=raw('feeding'),feeding=choice('feeding'),diet=choice('diet'); const nutrition=!feeding?'':(feedingRaw==='由口進食'||feedingRaw==='其他')?(diet?`飲食型態呈${diet}${c.dietNote?`（${c.dietNote}）`:''}`:'飲食型態'):`${c.tubeDateMode==='single'&&c.tubeDate?`${c.tubeDate}置放`:'留置'}${feeding==='留置鼻胃管（NG tube）'?'NG tube':feeding==='留置胃造口管（PEG tube）'?'PEG tube':feeding}${c.tubeSize?` ${c.tubeSize}`:''}${c.tubeDate&&c.tubeDateMode!=='single'?`（${c.tubeDate}）`:''}`; const tubes=[c.tubes&&`${c.tubesDateMode==='single'&&c.tubesDate?`${c.tubesDate}置放`:'置放'}${c.tubes}${c.tubesDate&&c.tubesDateMode!=='single'?`（${c.tubesDate}）`:''}`,choice('hasOtherTubes')==='有'&&c.otherTubes&&`${c.otherTubesDateMode==='single'&&c.otherTubesDate?`${c.otherTubesDate}置放`:'置放'}${c.otherTubes}${c.otherTubesDate&&c.otherTubesDateMode!=='single'?`（${c.otherTubesDate}）`:''}`].filter(Boolean).join('；'); const skinRaw=raw('skin'),skinChoice=choice('skin'),skinNote=other('skin'); const skin=!skinChoice?'':skinRaw==='完整'?'皮膚完整':skinRaw==='缺損'?`皮膚缺損${skinNote?`（${skinNote}）`:''}`:skinRaw==='其他'?(skinNote?`皮膚（${skinNote}）`:'皮膚'):`皮膚${skinChoice}`; const edemaRaw=raw('edema'),edemaChoice=choice('edema'),edemaNote=other('edema'),edemaSite=text('edemaSite'); const edema=!edemaChoice?'':edemaRaw==='無水腫'?'身體無水腫':edemaRaw==='其他'?(edemaNote?`${edemaSite}水腫（${edemaNote}）`:'水腫'):`${edemaSite}${edemaChoice}水腫`; const assessment=[c.gcs&&`GCS：${c.gcs}`,choice('consciousness')&&`意識${choice('consciousness')}`,c.vitals,breathing,nutrition,choice('urination'),tubes,skin,edema].filter(Boolean).join('；'); const cleanMedsClean=c.meds?cleanMedicationString(c.meds):''; const medication=!cleanMedsClean?'':(cleanMedsClean.trim()==='無'?'口服藥內容（無）':`口服藥內容（${cleanMedsClean}${c.medDays?` * ${c.medDays.replace(/\s*天\s*$/, '')}天份`:''}）`); const followUp=c.followUp?`回診日期${c.followUp}${c.followUpNote?`（${c.followUpNote}）`:''}`:''; if(state.mode==='new'){ const source=choice('newSource'); const route=source==='醫院出院'&&text('admissionHospital')?`從${shortHospitalName(text('admissionHospital'))}出院至本院入住`:source==='其他機構'&&text('admissionReferral')?`從${text('admissionReferral')}至本院入住`:source&&source!=='醫院出院'&&source!=='其他機構'?`從${source}至本院入住`:''; const examRaw=raw('admissionExam'),examChoice=choice('admissionExam'),examNote=other('admissionExam'); const exam=!examChoice?'':examRaw==='已完成'?'入住體檢已完成':examRaw==='其他'?(examNote?`入住體檢（${examNote}）`:'入住體檢'):`入住體檢${examChoice}${examNote?`（${examNote}）`:''}`; const supplyRaw=raw('supplySource'),supplyChoice=choice('supplySource'),supplyNote=other('supplySource'); const supply=!supplyChoice?'':supplyRaw==='其他'?(supplyNote?`衛生耗材（${supplyNote}）`:'衛生耗材'):`衛生耗材${supplyChoice}${supplyNote?`（${supplyNote}）`:''}`; const reason=choice('admissionReason'); const clinical=[c.note,reason&&`因${reason}`,c.diagnosis,medication,followUp].filter(Boolean).join('；'); const body=[`${companion('companion')}${choice('transport')}${route}`,weight,isolation,exam,supply,assessment,clinical].filter(Boolean).join('；'); return [`護理焦點：【新入住】`,c.dateTime&&`紀錄日期時間：${c.dateTime}`,[c.name&&`住民姓名：${c.name}`,c.age&&`年齡：${c.age} 歲`,choice('gender')&&`性別：${choice('gender')}`].filter(Boolean).join('，'),body].filter(Boolean).join('\n')+'。'; } const hospital=shortHospitalName(c.dischargeHospital)||'',reason=choice('dischargeReason'); const route=hospital&&choice('dischargeTransport')?`${companion('dischargeCompanion')}${choice('dischargeTransport')}從${hospital}出院至本院入住`:''; const clinical=[c.note,reason&&`因${reason}`,c.diagnosis,medication,followUp].filter(Boolean).join('；'); const body=[route,weight,isolation,assessment,clinical].filter(Boolean).join('；'); return [`護理焦點：${hospital}【出院】`,c.dateTime&&`紀錄日期時間：${c.dateTime}`,[c.name&&`住民姓名：${c.name}`,c.age&&`年齡：${c.age} 歲`,choice('gender')&&`性別：${choice('gender')}`].filter(Boolean).join('，'),body].filter(Boolean).join('\n')+'。'; }
+    function buildRecordClean(){ const c=common(); const raw=id=>String($(id)?.value||''); const other=id=>String($(id)?.parentElement.querySelector('[data-other-input]')?.value||'').trim(); const choice=id=>raw(id)==='其他'?other(id):fieldValue(id); const companion=id=>{ const value=choice(id); return value?`由${value.replace(/^由/,'').replace(/陪同$/,'').trim()}陪同`:''; }; const weightStatus=choice('weightStatus'),room=choice('isolationRoom'); const weight=weightStatus==='已量測'?`量測體重：${c.weight?`${c.weight}公斤`:''}`:weightStatus==='未量測'?'未量測體重':''; const isolation=room?`安排轉至${room}${c.observationDays?`留觀 * ${c.observationDays}天`:''}`:''; const respiratory=choice('respiratory'); const breathing=respiratory&&respiratory!=='無使用呼吸輔助器'?`使用${respiratory}${c.venturiPercent?` ${c.venturiPercent}`:''}${c.oxygen?` ${c.oxygen}`:''}`:''; const feedingRaw=raw('feeding'),feeding=choice('feeding'),diet=choice('diet'); const nutrition=!feeding?'':(feedingRaw==='由口進食'||feedingRaw==='其他')?(diet?`飲食型態呈${diet}${c.dietNote?`（${c.dietNote}）`:''}`:'飲食型態'):`${c.tubeDateMode==='single'&&c.tubeDate?`${c.tubeDate}置放`:'留置'}${feeding==='留置鼻胃管（NG tube）'?'NG tube':feeding==='留置胃造口管（PEG tube）'?'PEG tube':feeding}${c.tubeSize?` ${c.tubeSize}`:''}${c.tubeDate&&c.tubeDateMode!=='single'?`（${c.tubeDate}）`:''}`; const tubes=[c.tubes&&`${c.tubesDateMode==='single'&&c.tubesDate?`${c.tubesDate}置放`:'置放'}${c.tubes}${c.tubesDate&&c.tubesDateMode!=='single'?`（${c.tubesDate}）`:''}`,choice('hasOtherTubes')==='有'&&c.otherTubes&&`${c.otherTubesDateMode==='single'&&c.otherTubesDate?`${c.otherTubesDate}置放`:'置放'}${c.otherTubes}${c.otherTubesDate&&c.otherTubesDateMode!=='single'?`（${c.otherTubesDate}）`:''}`].filter(Boolean).join('；'); const skinRaw=raw('skin'),skinChoice=choice('skin'),skinNote=other('skin'); const skin=!skinChoice?'':skinRaw==='完整'?'皮膚完整':skinRaw==='缺損'?`皮膚缺損${skinNote?`（${skinNote}）`:''}`:skinRaw==='其他'?(skinNote?`皮膚（${skinNote}）`:'皮膚'):`皮膚${skinChoice}`; const edemaRaw=raw('edema'),edemaChoice=choice('edema'),edemaNote=other('edema'),edemaSite=text('edemaSite'); const edema=!edemaChoice?'':edemaRaw==='無水腫'?'身體無水腫':edemaRaw==='其他'?(edemaNote?`${edemaSite}水腫（${edemaNote}）`:'水腫'):`${edemaSite}${edemaChoice}水腫`; const assessment=[c.gcs&&`GCS：${c.gcs}`,choice('consciousness')&&`意識${choice('consciousness')}`,c.vitals,breathing,nutrition,choice('urination'),tubes,skin,edema].filter(Boolean).join('；'); const cleanMedsClean=c.meds?cleanMedicationString(c.meds):''; const medication=!cleanMedsClean?'':(cleanMedsClean.trim()==='無'?'口服藥內容（無）':`口服藥內容（${cleanMedsClean}${c.medDays?` * ${c.medDays.replace(/\s*天\s*$/, '')}天份`:''}）`); const followUp=c.followUp?`回診日期${c.followUp}${c.followUpNote?`（${c.followUpNote}）`:''}`:''; if(state.mode==='new'){ const source=choice('newSource'); const route=source==='醫院出院'&&text('admissionHospital')?`從${shortHospitalName(text('admissionHospital'))}出院至本院入住`:source==='其他機構'&&text('admissionReferral')?`從${text('admissionReferral')}至本院入住`:source&&source!=='醫院出院'&&source!=='其他機構'?`從${source}至本院入住`:''; const examRaw=raw('admissionExam'),examChoice=choice('admissionExam'),examNote=other('admissionExam'); const exam=!examChoice?'':examRaw==='已完成'?'入住體檢已完成':examRaw==='其他'?(examNote?`入住體檢（${examNote}）`:'入住體檢'):`入住體檢${examChoice}${examNote?`（${examNote}）`:''}`; const supplyRaw=raw('supplySource'),supplyChoice=choice('supplySource'),supplyNote=other('supplySource'); const supply=!supplyChoice?'':supplyRaw==='其他'?(supplyNote?`衛生耗材（${supplyNote}）`:'衛生耗材'):`衛生耗材${supplyChoice}${supplyNote?`（${supplyNote}）`:''}`; const reason=choice('admissionReason'); const clinical=[c.note,reason&&`因${reason}`,c.diagnosis,medication,followUp].filter(Boolean).join('；'); const body=[`${companion('companion')}${choice('transport')}${route}`,weight,isolation,exam,supply,assessment,clinical].filter(Boolean).join('；'); return [`護理焦點：【新入住】`,c.dateTime&&`紀錄日期時間：${c.dateTime}`,[c.name&&`住民姓名：${c.name}`,c.age&&`年齡：${c.age} 歲`,choice('gender')&&`性別：${choice('gender')}`].filter(Boolean).join('，'),body].filter(Boolean).join('\n')+'。'; } const hospital=shortHospitalName(c.dischargeHospital)||'',reason=choice('dischargeReason'); const route=hospital&&choice('dischargeTransport')?`${companion('dischargeCompanion')}${choice('dischargeTransport')}從${hospital}出院至本院入住`:''; const clinical=[c.note,reason&&`因${reason}`,c.diagnosis,medication,followUp].filter(Boolean).join('；'); const body=[route,weight,isolation,assessment,clinical].filter(Boolean).join('；'); return [`護理焦點：${hospital?`${hospital}【出院】`:'【出院】'}`,c.dateTime&&`紀錄日期時間：${c.dateTime}`,[c.name&&`住民姓名：${c.name}`,c.age&&`年齡：${c.age} 歲`,choice('gender')&&`性別：${choice('gender')}`].filter(Boolean).join('，'),body].filter(Boolean).join('\n')+'。'; }
     buildRecord=buildRecordClean;
     const buildRecordWithDirectives=buildRecord;
     buildRecord=()=>{ let record=buildRecordWithDirectives(); const dnrStatus=fieldValue('institutionDnr'),dnrNote=text('institutionDnrNote'),emergencyPreference=text('emergencyPreference'); const dnr=dnrStatus?`DNR意願書${dnrStatus}${dnrNote?`（${dnrNote}）`:''}`:dnrNote?`DNR意願書（${dnrNote}）`:''; const emergency=emergencyPreference?`送醫方向（${emergencyPreference}）`:''; const directives=state.mode==='new'?[dnr,emergency].filter(Boolean).join('；'):''; if(!directives) return record; const note=text('conditionNote'); if(note&&record.includes(note)) return record.replace(note,`${note}；${directives}`); const reasonId=state.mode==='new'?'admissionReason':'dischargeReason'; const reason=fieldValue(reasonId); const anchors=[reason&&`因${reason}`,text('diagnosis'),text('medications')&&`口服藥內容（${text('medications')}`,text('followUp')&&`回診日期${text('followUp')}`].filter(Boolean); const anchor=anchors.find(value=>record.includes(value)); return anchor?record.replace(anchor,`${directives}；${anchor}`):record.replace(/。$/,`；${directives}。`); };
@@ -1279,6 +1298,17 @@
       const anchors=['Check Vital signs：','使用','飲食型態','自行如廁','大小便尿布使用','尿壺使用','尿袋使用','便盆椅使用','皮膚'];
       const anchor=anchors.find(value=>record.includes(value));
       return anchor?record.replace(anchor,`${pain}；${anchor}`):record.replace(/。$/,`；${pain}。`);
+    };
+    // 最後統一首行焦點格式：新入住為 護理焦點：【新入住】，出院為 護理焦點：醫院名稱【出院】（未填醫院則為 護理焦點：【出院】）。
+    const buildRecordWithFinalFocusFormat=buildRecord;
+    buildRecord=()=>{
+      const record=buildRecordWithFinalFocusFormat();
+      const lines=String(record||'').split('\n');
+      const hospital=shortHospitalName(text('dischargeHospital'))||'';
+      lines[0]=state.mode==='new'
+        ?'護理焦點：【新入住】'
+        :`護理焦點：${hospital?`${hospital}【出院】`:'【出院】'}`;
+      return lines.join('\n');
     };
     const escapeRegExp=value=>String(value).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
     function activeHighlightSpec(){ const element=state.activeRecordElement; if(!element||!isVisible(element)||element.disabled) return null; const owner=element.dataset.otherInput!==undefined?element.parentElement.querySelector('select')?.id||element.id:element.id; let value=element.dataset.otherInput!==undefined?String(element.value||'').trim():element.value==='其他'?String(element.parentElement.querySelector('[data-other-input]')?.value||'').trim():String(element.value||'').trim(); if(!value||['有','無','其他'].includes(value)) return null; if(owner==='recordDateTime') value=formatRecordDateTime(value); const escaped=escapeRegExp(value); const exact={residentName:new RegExp(`(住民姓名：)${escaped}`),residentAge:new RegExp(`(年齡：)${escaped}(?= 歲)`),gender:new RegExp(`(性別：)${escaped}(?=；|。)`),recordDateTime:new RegExp(`(紀錄日期時間：)${escaped}`),companion:new RegExp(`(由)${escaped}(?=陪同)`),dischargeCompanion:new RegExp(`(由)${escaped}(?=陪同)`),transport:new RegExp(`(陪同)${escaped}(?=從|；|。)`),dischargeTransport:new RegExp(`(陪同)${escaped}(?=從|；|。)`),newSource:new RegExp(`(從)${escaped}(?=至本院入住)`),admissionExam:new RegExp(`(入住體檢（)${escaped}(?=）)`),supplySource:new RegExp(`(衛生耗材（)${escaped}(?=）)`),consciousness:new RegExp(`(意識)${escaped}(?=；|。)`),temperature:new RegExp(`(Check Vital signs：)${escaped}(?=,|；|。)`),pulse:new RegExp(`(Check Vital signs：[^,；。]+,\\s*)${escaped}(?=,|；|。)`),respiration:new RegExp(`(Check Vital signs：[^,；。]+,\\s*[^,；。]+,\\s*)${escaped}(?=,|；|。)`),bloodPressure:new RegExp(`(BP：)${escaped}(?=mmHg)`),spo2:new RegExp(`(SpO₂：)${escaped}(?=%)`),gcs:new RegExp(`(GCS：)${escaped}(?=；|，|。)`),respiratory:new RegExp(`(使用)${escaped}(?= |；|。)`),oxygenOther:new RegExp(`(氧氣流量)${escaped}(?= L/min)`),feeding:new RegExp(`(進食方式)${escaped}(?=，|；|。)`),diet:new RegExp(`(飲食型態呈)${escaped}(?=（|；|。)`),urination:new RegExp(`(；)${escaped}(?=；|。)`),skin:new RegExp(`(皮膚)${escaped}(?=；|。)`),admissionReason:new RegExp(`(因)${escaped}(?=；|。)`),dischargeReason:new RegExp(`(因)${escaped}(?=；|。)`),weight:new RegExp(`(量測體重：)${escaped}(?=公斤)`),observationDays:new RegExp(`(留觀 \\* )${escaped}(?=天)`)}; if(exact[owner]) return exact[owner]; if(element.dataset.otherInput!==undefined||/^[\d./:\s]+$/.test(value)) return null; const aliases={feeding:{'留置鼻胃管（NG tube）':'NG tube','留置胃造口管（PEG tube）':'PEG tube'}}; const valueForRecord=aliases[owner]?.[value]||value; return new RegExp(escapeRegExp(valueForRecord)); }
@@ -1372,10 +1402,10 @@
     const clearCaseData=({restoreDate=false}={})=>{ window.cancelAnimationFrame(state.previewFrame); state.previewFrame=0; window.clearTimeout(state.validationTimer); state.validationTimer=0; $('recordForm').reset(); if(restoreDate) setCurrentRecordDateTime(); state.lastRecord=''; state.activeRecordElement=null; state.touchedFields.clear(); $('previewActiveField').textContent='目前編輯欄位：尚未選擇'; clearValidation(); $('admissionHospitalWrap').classList.add('hidden'); $('admissionReferralWrap').classList.add('hidden'); document.querySelectorAll('[data-other-input]').forEach(x=>x.classList.remove('show')); companionIds.forEach(updateCompanionField); updateConditionalFields(); updateFeedingFields(); updateWeightFields(); updateOtherTubes(); updatePainFields(); $('recordPreview').textContent='請先填寫住民姓名、紀錄日期與時間，以及其他紀錄後再按下「確認護理紀錄有無完整性」。'; $('previewStatus').textContent='尚未產生'; $('copyBtn').disabled=true; $('wordBtn').disabled=true; const optBtn=$('optimizeRecordBtn'); if(optBtn) optBtn.disabled=true; const banner=$('aiUncertaintyBanner'); if(banner) banner.classList.add('hidden'); document.querySelectorAll('.field.field-needs-check').forEach(f=>{ f.classList.remove('field-needs-check'); f.querySelector('.field-uncertain-badge')?.remove(); }); };
     $('clearBtn').addEventListener('click',()=>{ if(!confirm('確定要清除目前填寫內容嗎？')) return; clearCaseData({restoreDate:true}); });
     $('copyBtn').addEventListener('click',async()=>{ if(!state.lastRecord)return; const plainText=state.lastRecord; const richText=`<div style="text-align:left;white-space:pre-wrap">${escapeHtml(plainText)}</div>`; if(navigator.clipboard?.write&&window.ClipboardItem){ await navigator.clipboard.write([new ClipboardItem({'text/plain':new Blob([plainText],{type:'text/plain'}),'text/html':new Blob([richText],{type:'text/html'})})]); }else{ await navigator.clipboard.writeText(plainText); } $('previewStatus').textContent='已複製'; setTimeout(()=>$('previewStatus').textContent='已產生紀錄',1400); });
-    $('wordBtn').addEventListener('click',()=>{ if(!state.lastRecord)return; const c=common(); const html=`<!doctype html><html><head><meta charset="utf-8"><title>${escapeHtml(c.name)}護理紀錄</title><style>body,h1,p{text-align:left}p{white-space:pre-wrap}</style></head><body><h1>${state.mode==='new'?'新入住':'出院'}護理紀錄</h1><p>${escapeHtml(state.lastRecord).replace(/\n/g,'<br>')}</p></body></html>`; const safeFilePart=value=>String(value||'未填').replace(/[\\/:*?"<>|]/g,'-').replace(/\s+/g,' '); const blob=new Blob(['\ufeff',html],{type:'application/msword'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`${safeFilePart(c.name||'住民')} ${safeFilePart(c.dateTime)} 護理紀錄.doc`; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); });
+    $('wordBtn').addEventListener('click',()=>{ if(!state.lastRecord)return; const c=common(); const html=`<!doctype html><html><head><meta charset="utf-8"><title>${escapeHtml(c.name)}護理紀錄</title><style>body,h1,p{text-align:left}p{white-space:pre-wrap}</style></head><body><h1>${state.mode==='new'?'新入住':'出院'}護理紀錄</h1><p>${escapeHtml(state.lastRecord).replace(/\n/g,'<br>')}</p></body></html>`; const safeFilePart=value=>String(value||'未填').replace(/\//g,'／').replace(/:/g,'：').replace(/[\\*?"<>|]/g,'-').replace(/\s+/g,' ').trim(); const blob=new Blob(['\ufeff',html],{type:'application/msword'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`${safeFilePart(c.name||'住民')} ${safeFilePart(c.dateTime)} 護理紀錄.doc`; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); });
     const updateTubeDateMode=prefix=>{ const end=$( `${prefix}End` ); if(!end) return; const single=text(`${prefix}Mode`)==='single'; end.hidden=single; end.disabled=single; };
     ['tubeDate','tubesDate','otherTubesDate'].forEach(prefix=>{ $(`${prefix}Mode`).addEventListener('change',()=>updateTubeDateMode(prefix)); updateTubeDateMode(prefix); });
-    const setCurrentRecordDateTime=()=>{ const now=new Date(); const val=`${now.getFullYear()-1911}/${pad2(now.getMonth()+1)}/${pad2(now.getDate())} ${pad2(now.getHours())}:${pad2(now.getMinutes())}`; $('recordDateTime').value=val; $('recordDateTime').setAttribute('value',val); }; const now=new Date(),todayIso=`${now.getFullYear()}-${pad2(now.getMonth()+1)}-${pad2(now.getDate())}`; const setVersionDate=()=>{ const version=$('appVersion'); if(!version) return; const value='115/09/15'; version.textContent=`版本日期：${value}`; version.setAttribute('aria-label','版本日期：115年09月15日'); }; setCurrentRecordDateTime(); setVersionDate(); ['tubeDateStart','tubeDateEnd','tubesDateStart','tubesDateEnd','otherTubesDateStart','otherTubesDateEnd'].forEach(id=>$(id).value=todayIso);
+    const setCurrentRecordDateTime=()=>{ const now=new Date(); const val=`${now.getFullYear()-1911}/${pad2(now.getMonth()+1)}/${pad2(now.getDate())} ${pad2(now.getHours())}:${pad2(now.getMinutes())}`; $('recordDateTime').value=val; $('recordDateTime').setAttribute('value',val); }; const now=new Date(),todayIso=`${now.getFullYear()}-${pad2(now.getMonth()+1)}-${pad2(now.getDate())}`; const setVersionDate=()=>{ const version=$('appVersion'); if(!version) return; const value='115/09/16'; version.textContent=`版本日期：${value}｜功能優化`; version.setAttribute('aria-label','版本日期：115年09月16日，功能優化'); }; setCurrentRecordDateTime(); setVersionDate(); ['tubeDateStart','tubeDateEnd','tubesDateStart','tubesDateEnd','otherTubesDateStart','otherTubesDateEnd'].forEach(id=>$(id).value=todayIso);
     const music=$('backgroundMusic'),musicToggle=$('musicToggle'),musicPrev=$('musicPrev'),musicNext=$('musicNext'),musicVolume=$('musicVolume'),musicProgress=$('musicProgress'),musicTime=$('musicTime'),musicTrack=$('musicTrack'),musicRepeat=$('musicRepeat'),musicPlayPause=$('musicPlayPause');
     const musicLibraries={
       japanese:{label:'日語',tracks:[{title:'Believe',src:'assets/audio/japanese/Believe.mp3'},{title:'brave heart',src:'assets/audio/japanese/brave heart.mp3'},{title:'Dan Dan Kokoro Hikareteku',src:'assets/audio/japanese/Dan Dan Kokoro Hikareteku.flac'},{title:'Every Little Thing - Time Goes By',src:'assets/audio/japanese/Every Little Thing - Time Goes By.mp3'},{title:'YOASOBI - 群青',src:'assets/audio/japanese/YOASOBI - 群青.flac'}]},
@@ -1428,6 +1458,29 @@
     guideOpenBtn.addEventListener('click',openGuide); guideCloseBtn.addEventListener('click',closeGuide);
     guideDialog.addEventListener('click',event=>{ if(event.target===guideDialog) closeGuide(); });
     guideDialog.addEventListener('close',()=>guideOpenBtn.focus());
+
+    // 使用說明以安全、人工覆核為準，不將 API Key 寫入 HTML 或公開網站。
+    function refreshGuideCopy(){
+      const entries=Array.from(guideDialog.querySelectorAll('.guide-list > details'));
+      const findEntry=label=>entries.find(entry=>(entry.querySelector('summary')?.textContent||'').includes(label));
+      const setEntry=(label,title,html)=>{
+        const entry=findEntry(label);
+        if(!entry) return;
+        entry.querySelector('summary').textContent=title;
+        const body=entry.querySelector('.guide-content');
+        if(body) body.innerHTML=html;
+      };
+      const quick=guideDialog.querySelector('.guide-quick-start');
+      if(quick) quick.innerHTML='<strong>快速開始</strong><ol><li>選擇「新入住紀錄」或「出院紀錄」。</li><li><strong>AI 輔助（選用）</strong>：按下 AI 分析後，檔案或文字才會傳送至您設定的 AI 服務。</li><li>依序填寫或檢視左側欄位；有紅色 <span class="required">*</span> 者為必填。</li><li>AI 結果與右側護理紀錄均須由填寫人員逐項核對，最後再按下「確認護理紀錄有無完整性」。</li></ol>';
+      setEntry('基本操作與必填欄位','📖 基本操作與必填欄位','<p>左側欄位完成後，右側護理紀錄會即時更新。紅色 <span class="required">*</span> 為必填欄位；標示「選填」的內容可依實際情形留白。</p><p class="guide-tip">按下「確認護理紀錄有無完整性」後，系統會標示未完成的必填欄位；請由填寫人員核對是否符合機構表單規範。</p>');
+      setEntry('紀錄日期時間','🗓️ 紀錄日期時間','<p>可直接輸入民國年格式，例如 <kbd>115/09/16 14:30</kbd>，也可按日曆圖示選取日期與時間。</p><p class="guide-tip">系統會協助統一常見日期分隔格式；送出前仍請核對民國年、月份、日期與時間是否正確。</p>');
+      setEntry('全域 AI 智慧輔助','🚀 AI 智慧輔助：使用與人工覆核','<p>按下分析後，上傳的文件或貼上的文字才會傳送至您設定的 AI 服務進行處理。請只使用本次紀錄所需資料，並依機構個資規範處理。</p><ul><li>可上傳出院病摘、處方箋、回診單、管路單等資料，或貼上電子病歷文字。</li><li>系統會嘗試辨識回診、管路與其他欄位內容；辨識結果僅供整理參考，不代表已完成臨床判定或核對。</li><li>請依原始文件、實際評估、醫囑、個別照護計畫與機構 SOP 逐項確認後，再採用或修正內容。</li><li>若資料不完整、辨識不確定或與實際情形不一致，請不要直接帶入護理紀錄。</li></ul>');
+      setEntry('各欄位專屬 AI','✨ 各欄位專屬 AI 智慧整理','<p>「病況描述／交班重點」、「疾病／病史」與「口服藥內容」可個別使用 AI 整理。</p><ul><li>系統原則上只處理目前指定欄位；送出前請確認內容範圍，完成後請核對是否有遺漏、誤植或不符合原始資料之處。</li><li>整理結果應維持客觀、可追溯；姓名、檢驗值、管路、藥品、診斷與處置等資料均須回到原始文件確認。</li><li>若上傳內容與欄位主題不相符，請改用人工填寫或重新提供適當資料。</li></ul>');
+      setEntry('口服藥內容','💊 口服藥內容與天數','<p>用藥內容請以處方、藥袋或醫囑為準。系統若協助辨識，僅用於整理，不取代給藥核對。</p><ul><li>可依醫院與科別分組，保留藥名、劑型、規格、劑量、途徑、頻次及必要天數。</li><li>系統會嘗試分辨開立天數與發放總數；請由護理人員依原始資料再次核對。</li><li>水劑、粉劑、吸入劑、貼片與胰島素等單位，請依實際醫囑確認後填寫。</li></ul>');
+      setEntry('完整護理紀錄「✨ 整理優化內容」','📝 完整護理紀錄「✨ 整理優化內容」','<p>此功能用於協助調整語句與全形標點，並保留既有護理紀錄架構。</p><ul><li>系統會嘗試保留原有資料與順序，但優化後仍須由填寫人員核對姓名、生命徵象、GCS、肌力、檢驗值、管路、藥品及結論。</li><li>若優化內容與原始資料、實際評估或機構書寫規範不一致，請手動修正或不要採用。</li><li>「重新優化」會產生另一份建議版本，並非代表前一版本有誤。</li></ul>');
+      setEntry('資料安全與金鑰管理','🔒 資料隱私、AI 金鑰與共用電腦','<p><strong>API Key 不是登入密碼。</strong>本工具不會把 API Key 寫入 HTML 檔案或 GitHub 公開網站原始碼。</p><ul><li><strong>自動記憶：</strong>您在該台電腦、該瀏覽器設定 API Key 後，瀏覽器會以 LocalStorage 暫存；日後開啟同一網站時可自動讀取，不需要每次重新輸入。</li><li><strong>本機與網站分開：</strong>本機可攜版與 GitHub 網站版屬於不同來源，API Key 會各自儲存在不同的 LocalStorage；在其中一處設定，不會自動同步到另一處。</li><li><strong>限制與風險：</strong>LocalStorage 是方便機制，不是伺服器等級的金鑰保護。可使用該電腦與瀏覽器設定檔的人，可能取得或使用已儲存的金鑰；請以電腦登入帳號、螢幕鎖定與瀏覽器帳號權限保護設備。</li><li><strong>共用電腦：</strong>輪調、共用、借用或離開設備前，請到「設定 API Key」視窗按下「清除金鑰」，並依機構規範處理瀏覽器資料。</li><li><strong>AI 資料傳送：</strong>只有在您啟動 AI 分析或整理時，所選檔案與文字才會送至您設定的 AI 服務；請勿上傳與本次紀錄無關的個資。</li><li><strong>人工覆核：</strong>AI 結果僅供整理參考，護理人員仍須依原始文件、實際評估、醫囑、照護計畫及機構 SOP 確認後使用。</li></ul>');
+    }
+    refreshGuideCopy();
 
     /* ==========================================
        AI 出院病摘自動辨識與填表功能 (Google Gemini 2.0 Flash)
@@ -1591,6 +1644,8 @@
     }
 
     function openApiKeyAuthDialog() {
+      openAiKeyDialog();
+      return;
       if (!apiKeyAuthDialog) {
         openAiKeyDialog();
         return;
@@ -1870,7 +1925,8 @@ function openAiKeyDialog() {
         global: { box: 'globalAiOuterProgress', pct: 'globalAiOuterPct' },
         conditionNote: { box: 'conditionNoteOuterProgress', pct: 'conditionNoteOuterPct' },
         diagnosis: { box: 'diagnosisOuterProgress', pct: 'diagnosisOuterPct' },
-        medications: { box: 'medicationsOuterProgress', pct: 'medicationsOuterPct' }
+        medications: { box: 'medicationsOuterProgress', pct: 'medicationsOuterPct' },
+        optimize: { box: 'optimizeOuterProgress', pct: 'optimizeOuterPct' }
       };
       const conf = idMap[type];
       if (!conf) return;
@@ -2140,8 +2196,8 @@ function openAiKeyDialog() {
 - 用藥排版與間隔規範（絕對不用條列式，直接用「、」間隔）：
   * 嚴禁使用 1. 2. 3. 等數字條列式，嚴禁換行分行！
   * 所有口服藥物一律連續排列在同一個段落中，各項藥物之間【一律直接以頓號「、」相隔】！
-- 呈現時藥物前面除了科別，也要有醫院名稱：
-  在藥物前面除了科別，必須包含醫院名稱，格式一律為【醫院 科別】分組呈現（例如：【成大醫院 心臟內科】Bokey 100mg 1顆 PO QD、Madopar 250mg 半顆 PO TID、Midodrine 2mg 2顆 PO BID），不可只有科別。
+- 若佐證資料有醫院與科別，藥物前方保留醫院與科別名稱（不加【】符號）：
+  若病摘或藥袋有明確記載醫院與科別，藥物前方請標註醫院名稱與科別（不用加【】符號，直接以文字呈現，例如：成大醫院 心臟內科 Bokey 100mg 1顆 PO QD、Madopar 250mg 半顆 PO TID；若無醫院科別則直接依序列出藥品），各藥物間以頓號「、」相隔。
 - 用藥核心要素與各劑型（膠囊、顆粒錠劑、水劑藥水、粉劑散劑）精準書寫規範：
   * 每種藥物必須清楚包含：【藥名】、【規格劑量】、【每次劑量與單位】、【使用途徑（PO/SL等）】、【時間頻率（QD/BID/TID/QID/QHS/PRN等）】。
   * 【每次顆粒數／水劑量精準辨識（極重要：可能一次半顆、兩顆，務必如實精準標註）】：
@@ -2546,10 +2602,16 @@ function openAiKeyDialog() {
     const optimizeRecordDialog = $('optimizeRecordDialog'),
           optimizeRecordBtn = $('optimizeRecordBtn'),
           optimizeRecordCloseBtn = $('optimizeRecordCloseBtn'),
-          optimizeRegenBtn = $('optimizeRegenBtn'),
           optimizeApplyBtn = $('optimizeApplyBtn'),
+          optimizeRegenBtn = $('optimizeRegenBtn'),
           optimizeOriginalText = $('optimizeOriginalText'),
-          optimizePolishedText = $('optimizePolishedText');
+          optimizePolishedText = $('optimizePolishedText'),
+          optimizeColBadge = $('optimizeColBadge'),
+          optimizeProgressContainer = $('optimizeProgressContainer'),
+          optimizeProgressBar = $('optimizeProgressBar'),
+          optimizeProgressPercent = $('optimizeProgressPercent'),
+          optimizeInnerProgress = $('optimizeInnerProgress'),
+          optimizeInnerPct = $('optimizeInnerPct');
 
     function openOptimizeRecordDialog() {
       if (!optimizeRecordDialog) return;
@@ -2569,9 +2631,52 @@ function openAiKeyDialog() {
       }
     }
 
-        let cachedPolishedText = '';
+    function setOptimizeProgress(percent, stageDetail = null) {
+      const p = Math.max(0, Math.min(100, Math.round(percent)));
+      if (optimizeProgressContainer) {
+        if (p > 0 && p < 100) {
+          optimizeProgressContainer.classList.remove('hidden');
+        } else if (p === 0) {
+          optimizeProgressContainer.classList.add('hidden');
+        }
+      }
+      if (optimizeProgressBar) optimizeProgressBar.style.width = `${p}%`;
+      if (optimizeProgressPercent) optimizeProgressPercent.textContent = `${p}%`;
+      if (optimizeInnerProgress && optimizeInnerPct) {
+        if (p > 0 && p < 100) {
+          optimizeInnerProgress.classList.remove('hidden');
+          optimizeInnerProgress.className = 'ai-outer-progress is-running';
+          optimizeInnerPct.textContent = `${p}% 優化中`;
+        } else if (p === 100) {
+          optimizeInnerProgress.classList.remove('hidden');
+          optimizeInnerProgress.className = 'ai-outer-progress is-success';
+          optimizeInnerPct.textContent = '✓ 100% 完成';
+          setTimeout(() => {
+            optimizeInnerProgress.classList.add('hidden');
+            if (optimizeProgressContainer) optimizeProgressContainer.classList.add('hidden');
+          }, 1200);
+        } else {
+          optimizeInnerProgress.classList.add('hidden');
+        }
+      }
+    }
+
+    let cachedPolishedText = '';
     let cachedPolishedSource = '';
     let isOptimizingRecord = false;
+    let optimizeTimer = null;
+
+    optimizeApplyBtn?.addEventListener('click', () => {
+      const textToApply = (optimizePolishedText?.value || '').trim();
+      if (!textToApply) {
+        alert('尚無整理優化後的內容可供套用！');
+        return;
+      }
+      cachedPolishedText = textToApply;
+      state.lastRecord = textToApply;
+      updateAllOutputs(textToApply);
+      closeOptimizeRecordDialog();
+    });
 
     optimizePolishedText?.addEventListener('input', () => {
       cachedPolishedText = optimizePolishedText.value;
@@ -2598,6 +2703,8 @@ function openAiKeyDialog() {
         }
         if (optimizeApplyBtn) optimizeApplyBtn.disabled = false;
         if (optimizeRegenBtn) optimizeRegenBtn.disabled = false;
+        setOptimizeProgress(0);
+        if (optimizeColBadge) optimizeColBadge.textContent = '潤飾完成（可自由編輯）';
         openOptimizeRecordDialog();
         return;
       }
@@ -2606,33 +2713,91 @@ function openAiKeyDialog() {
         cachedPolishedText = '';
       }
 
+      if (optimizeTimer) {
+        clearInterval(optimizeTimer);
+        optimizeTimer = null;
+      }
+
+      let optimizeProg = 10;
+      setOptimizeProgress(10);
+      updateOuterAiProgress('optimize', 10, 'running', '10% 優化中');
+
       if (optimizePolishedText) {
-        optimizePolishedText.value = force 
-          ? '✨ AI 正在重新整理修飾護理紀錄中（繁中為主、單一完整段落、精選少見專業術語提升知識），請稍候...'
-          : '✨ AI 正在專業整理修飾護理紀錄中（繁中為主、單一完整段落、精選少見專業術語提升知識），請稍候...';
+        optimizePolishedText.value = `✨ AI 正在專業整理優化護理紀錄中（進度 10%：各大區塊空行排版、語句修飾、專有名詞對照），請稍候...`;
         optimizePolishedText.disabled = true;
       }
+      if (optimizeColBadge) optimizeColBadge.textContent = 'AI 整理優化中...';
       if (optimizeApplyBtn) optimizeApplyBtn.disabled = true;
       if (optimizeRegenBtn) optimizeRegenBtn.disabled = true;
 
       openOptimizeRecordDialog();
       isOptimizingRecord = true;
 
+      optimizeTimer = setInterval(() => {
+        if (optimizeProg < 92) {
+          const step = Math.floor(Math.random() * 5) + 3;
+          optimizeProg = Math.min(92, optimizeProg + step);
+          let stageMsg = '✨ AI 正在專業整理優化護理紀錄中';
+          if (optimizeProg < 35) {
+            stageMsg = `✨ AI 正在分析護理紀錄架構與各區塊 (${optimizeProg}%)...`;
+          } else if (optimizeProg < 65) {
+            stageMsg = `✨ AI 正在修飾語句流暢度與全形標點符號 (${optimizeProg}%)...`;
+          } else {
+            stageMsg = `✨ AI 正在進行長照大區塊空行排版與生命徵象保真 (${optimizeProg}%)...`;
+          }
+          if (optimizePolishedText && isOptimizingRecord) {
+            optimizePolishedText.value = `${stageMsg}\n\n【目前進度：${optimizeProg}%】\n各大區塊空行間隔排版、語句與標點修飾、專有名詞靈活對照，請稍候...`;
+          }
+          setOptimizeProgress(optimizeProg);
+          updateOuterAiProgress('optimize', optimizeProg, 'running', `${optimizeProg}% 優化中`);
+        }
+      }, 340);
+
       try {
         const modeTitle = state.mode === 'discharge' ? '出院' : '新入住';
+        const hospitalName = shortHospitalName(text('dischargeHospital')) || '';
+        const focusHeader = state.mode === 'new'
+          ? '護理焦點：【新入住】'
+          : `護理焦點：${hospitalName ? `${hospitalName}【出院】` : '【出院】'}`;
+
         const optimizePrompt = `你是一位資深的台灣長照機構（安養護機構/護理之家）資深護理督導與個管紀錄書寫專家。
 現在有一份由系統產生的「${modeTitle}護理紀錄」初稿。
 請將這份護理紀錄進行專業優化與語句修飾，使其能「直接放入長照機構護理資訊系統中」。
 
-【極重要核心原則與優化定位（嚴格執行，絕不打亂原有規則與架構）】：
-1. 【嚴格保留原本護理紀錄的段落架構與排版規則，絕不可全數打亂擠成一團】：
-   - 原始紀錄具備嚴謹的長照臨床架構（包含基本資料、主訴病況歷程、生命徵象、意識與肢體肌力評估、管路與皮膚狀況、疾病診斷史、口服藥品內容、照護計畫與結論處置）。
-   - 請【維持原本紀錄的分段與條理層次】，絕對不可把原本所有不同區塊的文字硬性揉捏或壓縮成混亂的一大坨文字！每一段原本有換行分段的地方請維持清晰架構。
-2. 【核心優化任務：主要修飾內容語句順暢、與符號等等】：
-   - 【語句通順流暢】：潤飾各段落敘述語意，修正生硬卡頓或生硬拼接的句子，使整體語句更加通順、自然、邏輯緊密且具備長照專業護理口吻。
-   - 【全形標點符號標準化】：全面修飾並標準化標點符號，使用臨床標準全形標點（，、。；），修正不恰當的頓號與逗號，使文句停頓合理典雅。
-   - 【口服藥排版規則嚴格維持】：藥物前面【醫院 科別】分組呈現、各項藥物以頓號「、」相隔、各劑型（半顆、2顆、水劑ml、散劑包）與天數標註規則絕對不可打亂或變動！
-3. 【專業名詞中英文對照規範（清爽不雜亂、視專有名詞多寡靈活判斷）】：
+【極重要：全文結構排版規範（開頭三行緊密相連不空行，其餘大區塊之間一律空一行 \n\n）】：
+整篇優化後的護理紀錄，必須嚴格依照以下格式輸出：
+- 【開頭三行資訊（護理焦點、紀錄日期時間、住民姓名）絕對不要有空行，直接一行接一行緊密相連輸出！】
+- 其餘各大區塊（基本評估、病況歷程故事、出院診斷清單、口服藥物、回診安排、結論處置）之間，一律空一行（雙換行 \n\n），層次分明、排版舒適：
+
+${focusHeader}
+紀錄日期時間：[民國年/MM/DD HH:mm]
+住民姓名：[姓名]，年齡：[年齡] 歲，性別：[性別]。
+[入住/出院途徑、交通方式與陪同者；量測體重；安排隔離留觀；入住體檢與衛生耗材；GCS 與意識狀態；肌力（MP）；疼痛 NRS；Check Vital signs 生命徵象（【生命徵象呈現方式完全不異動，保持未優化之前的原始呈現方式】，例如初稿為「Check Vital signs：36.8, 82, 18, BP：125/70mmHg, SpO₂：94%」即完全原樣輸出，保留原有逗號與格式，絕不變更符號或改寫）；飲食型態；排泄狀況；留置管路；皮膚完整度；身體水腫評估。]
+
+[病況歷程與交班故事重點（若原始初稿有病況內容才輸出）：融合成一篇通順流暢的連貫故事段落，詳細描述住院起因、重大處置或手術歷程、加護治療進展、目前病況穩定度。段落後方包含 DNR 意願書簽署狀況、送醫方向與入住原因。]
+
+出院診斷：
+1. [診斷一] ([英文縮寫或名稱])。
+2. [診斷二] ([英文縮寫或名稱])。
+（若原始初稿為出院診斷或疾病史，標題請單獨成行，每一項診斷換行並以 1. 2. 3. 編號排列。若有重大臨床檢驗數值，必須完整保留於括號內。）
+
+口服藥內容：
+[所有口服藥物排列在同一段落，若初稿或佐證資料有醫院與科別，直接保留其名稱（不加【】符號，如 成大醫院 心臟內科 Bokey 100mg 1顆 PO QD...），各項藥物之間以頓號「、」相隔。清楚包含藥名、規格劑量、每次顆粒數/劑量單位（如 1 顆、半顆、水劑 ml、散劑包）、途徑、頻率，天數標記（如 * 14 天份 或 7 天份）。]
+
+回診日期：[民國年/MM/DD 科別（補充事項與交通安排）。]（若原始初稿有回診資訊才輸出此區塊）
+
+予以全人評估，依照評估項目的照護問題，擬定護理計畫及目標，並執行護理措施及照會跨專業團隊。
+
+--------------------------------------------------
+
+【核心優化任務與語句修飾規範】：
+1. 【開頭資訊緊密相連，不留空行】：最上方開頭的「護理焦點：...」、「紀錄日期時間：...」、「住民姓名：...」三行之間【絕對不要有任何空行或間隔】，直接一行接一行緊密相連輸出！
+2. 【其餘大區塊之間空行間隔（雙換行 \n\n）】：其餘各大區塊（基本評估、病況故事、診斷清單、口服藥、回診、結論）之間，必須以一個空行間隔開來，切勿擠成一團。
+3. 【語句通順流暢】：潤飾各段落敘述語意，修正生硬卡頓或生硬拼接的句子，使整體語句更加通順、自然、邏輯緊密且具備長照專業護理口吻。
+4. 【全形標點符號標準化】：全面修飾並標準化標點符號，使用臨床標準全形標點（，、。；），修正不恰當的頓號與逗號，使文句停頓合理典雅。
+5. 【生命徵象呈現方式完全不異動（嚴格保持未優化之前的模式）】：原始初稿中的生命徵象「Check Vital signs：...」（包含體溫、脈搏、呼吸數值、英文逗號與空格、BP：...mmHg、SpO₂：...% 等），必須【100% 保持未優化之前的原始呈現方式輸出】，絕對不要進行任何格式異動、單位調整、標點替換或擅自改寫為 T/P/R/bpm/次/分！
+6. 【口服藥排版規則】：若初稿或佐證資料有醫院與科別，直接保留其名稱（不加【】符號，如 成大醫院 心臟內科 Bokey 100mg 1顆 PO QD...），標題「口服藥內容：」後換行，直接列出各項藥物並以頓號「、」相隔、各劑型（半顆、2顆、水劑ml、散劑包）與天數標註規則嚴格維持！
+7. 【專業名詞中英文對照規範（清爽不雜亂、視專有名詞多寡靈活判斷）】：
    - 核心目的：保持整篇護理紀錄清爽乾淨、層次分明，同時幫助長照護理同仁增長臨床專業知識。
    - 【情況一：專有名詞較多時（少見附英，常見純中）】：
      * 遇到較少見、特殊或具臨床學習價值之術語診斷（如 AMI、CABG、BPH、VVS、PEG、MG、A-V shunt 等），3 個不夠可視情況彈性增加附上 (英文縮寫)。
@@ -2640,19 +2805,41 @@ function openAiKeyDialog() {
    - 【情況二：專有名詞很少或沒有時（可彈性套用常見名詞）】：
      * 若個案紀錄中幾乎無特殊少見名詞，此時【亦可為高血壓 (HTN)、糖尿病 (DM)、骨折 (Fracture) 等常見疾病標註英文縮寫】，以維持臨床專業感。
      * 但數量一樣不要過多，隨時遵守「不要讓整個護理紀錄內容很亂」的最高指導原則！
-4. 【100% 絕對保留所有客觀事實與臨床數據（零篡改、零捏造）】：
+8. 【客觀事實與臨床數據嚴格維持（零篡改、零捏造）】：
    - 住民姓名、年齡、性別、紀錄日期與時間
-   - 所有生命徵象數據（T、P、R、BP、SpO2）、GCS 意識評估分數、瞳孔大小對光反應、四肢肌力 MP 分數、疼痛 NRS 分數
+   - 所有生命徵象數據（T、P、R、BP、SpO2）、GCS 意識評估分數、肢體肌力 MP 分數、疼痛 NRS 分數
    - 所有疾病診斷（包含檢驗數值如 Na、K、Cr、Hb 等數值）、管路種類/尺寸/日期、口服藥品規格劑量頻率天數、回診安排
-   - 結尾處置結論（「予以全人評估，依照評估項目的照護問題，擬定護理計畫及目標，並執行護理措施及照會跨專業團隊。」）
-   - 以上所有客觀數據絕對嚴格保留，不可刪除、篡改或捏造！
-5. 請直接輸出優化後的繁體中文完整護理紀錄純文字，嚴禁包含任何問候語、開頭廢話、說明或 markdown 標記。
+   - 以上所有客觀數據嚴格維持，不可刪除、篡改或捏造！
+9. 請直接輸出優化後的繁體中文完整護理紀錄純文字，嚴禁包含任何問候語、開頭廢話、說明或 markdown 標記（嚴禁使用反引號程式碼框）。
 
-以下為原始護理紀錄內容：
+以下為原始護理紀錄初稿：
 ${state.lastRecord}`;
 
         const polishedText = await callGeminiApi([{ text: optimizePrompt }], aiState.apiKey, { isJson: false });
-        const cleanPolished = normalizeDateToSlash(polishedText.trim());
+        let cleanPolished = polishedText.trim();
+        cleanPolished = cleanPolished.replace(/^```[a-zA-Z]*\s*/, '').replace(/\s*```$/, '').trim();
+        cleanPolished = normalizeDateToSlash(cleanPolished);
+        cleanPolished = cleanPolished.replace(/\n{3,}/g, '\n\n');
+
+        // 開頭三行緊密相連不留空行：護理焦點、紀錄日期時間、住民姓名
+        cleanPolished = cleanPolished.replace(
+          /(護理焦點：[^\n\r]+)\s*[\r\n]+\s*(紀錄日期時間：[^\n\r]+)\s*[\r\n]+\s*(住民姓名：[^\n\r]+)/,
+          '$1\n$2\n$3'
+        );
+
+        // 生命徵象呈現方式完全不異動：嚴格保持未優化之前的模式
+        const rawVitalsMatch = (state.lastRecord || '').match(/Check Vital signs[：:][^；。\n\r]+/i);
+        if (rawVitalsMatch) {
+          const rawVitals = rawVitalsMatch[0].trim();
+          cleanPolished = cleanPolished.replace(/(?:Check Vital signs|生命徵象)[：:][^；。\n\r]+/i, rawVitals);
+        }
+
+        if (optimizeTimer) {
+          clearInterval(optimizeTimer);
+          optimizeTimer = null;
+        }
+        setOptimizeProgress(100, '✓ 優化完成！');
+        updateOuterAiProgress('optimize', 100, 'success', '✓ 100% 完成');
 
         cachedPolishedText = cleanPolished;
         cachedPolishedSource = state.lastRecord;
@@ -2661,9 +2848,16 @@ ${state.lastRecord}`;
           optimizePolishedText.value = cleanPolished;
           optimizePolishedText.disabled = false;
         }
+        if (optimizeColBadge) optimizeColBadge.textContent = '潤飾完成（可自由編輯）';
         if (optimizeApplyBtn) optimizeApplyBtn.disabled = false;
         if (optimizeRegenBtn) optimizeRegenBtn.disabled = false;
       } catch (err) {
+        if (optimizeTimer) {
+          clearInterval(optimizeTimer);
+          optimizeTimer = null;
+        }
+        setOptimizeProgress(0);
+        updateOuterAiProgress('optimize', 0, 'error', '優化失敗');
         console.error('AI 整理優化護理紀錄錯誤：', err);
         let msg = err.message || '未知錯誤';
         if (msg.includes('API_KEY_INVALID') || msg.includes('403') || msg.includes('400')) {
@@ -2673,12 +2867,12 @@ ${state.lastRecord}`;
           optimizePolishedText.value = `⚠️ 整理優化發生錯誤：${msg}\n\n您可手動調整左側原始紀錄，或點擊「🔄 重新優化」再次嘗試。`;
           optimizePolishedText.disabled = false;
         }
+        if (optimizeColBadge) optimizeColBadge.textContent = '優化失敗';
         if (optimizeRegenBtn) optimizeRegenBtn.disabled = false;
       } finally {
         isOptimizingRecord = false;
       }
     }
-
     optimizeRecordBtn?.addEventListener('click', () => handleOptimizeRecord(false));
     optimizeRegenBtn?.addEventListener('click', () => handleOptimizeRecord(true));
     optimizeRecordCloseBtn?.addEventListener('click', closeOptimizeRecordDialog);
@@ -2764,7 +2958,7 @@ ${state.lastRecord}`;
       },
       medications: {
         title: '口服藥內容（含天數）',
-        shortDesc: '專屬辨識：用藥資訊與簡化劑量、跨院跨科分組【醫院 科別】、長短期天數分流（少數天數無括號）。',
+        shortDesc: '專屬辨識：用藥資訊與簡化劑量、直接列出藥品規格頻次、長短期天數分流（少數天數無括號）。',
         btnText: '開始專屬 AI 辨識用藥內容'
       }
     };
@@ -3132,8 +3326,8 @@ ${state.lastRecord}`;
 1. 嚴禁使用 1. 2. 3. 等數字條列式，嚴禁換行分行！
 2. 所有口服藥物一律連續排列在同一個段落中，各項藥物之間【一律直接以頓號「、」相隔】！
 
-【口服藥物前面必須包含醫院名稱與科別】：
-在藥物前面除了科別，必須包含醫院名稱，格式一律為【醫院 科別】分組呈現（例如：【成大醫院 心臟內科】Bokey 100mg 1顆 PO QD、Madopar 250mg 半顆 PO TID、Midodrine 2mg 2顆 PO BID），不可只有科別。
+【若佐證資料有醫院與科別，藥物前方保留醫院與科別名稱（不加【】符號）】：
+若病摘或藥袋有明確記載醫院與科別，藥物前方請標註醫院名稱與科別（不用加【】符號，直接以文字呈現，例如：成大醫院 心臟內科 Bokey 100mg 1顆 PO QD、Madopar 250mg 半顆 PO TID；若無醫院科別則直接依序列出藥名、規格劑量、顆粒數/劑量單位、途徑與頻次），各藥物間以頓號「、」相隔。
 
 【用藥核心要素與各劑型（膠囊、顆粒錠劑、水劑藥水、粉劑散劑）精準書寫規範】：
 1. 每種藥物必須清楚包含：【藥名】、【規格劑量】、【每次劑量與單位】、【使用途徑（PO/SL等）】、【時間頻率（QD/BID/TID/QID/QHS/PRN等）】。
@@ -3167,7 +3361,7 @@ ${state.lastRecord}`;
 
 請嚴格輸出純 JSON 格式，絕對不要包含任何 markdown 標記或程式碼區塊（不要包含任何反引號標籤）：
 {
-  "medications": "【成大醫院 心臟內科】Bokey 100mg 1顆 PO QD、Madopar 250mg 半顆 PO TID、Midodrine 2mg 2顆 PO BID、Acetaminophen 500mg 1顆 Q12H PO 7天份",
+  "medications": "Bokey 100mg 1顆 PO QD、Madopar 250mg 半顆 PO TID、Midodrine 2mg 2顆 PO BID、Acetaminophen 500mg 1顆 Q12H PO 7天份",
   "medDays": "14",
   "uncertainties": [
     {
@@ -3348,7 +3542,7 @@ ${state.lastRecord}`;
       });
     });
 
-    $('appVersion').textContent='版本日期：115/09/15 (優化保留架構修飾語句標點+專有名詞彈性中英)'; $('appVersion').setAttribute('aria-label','版本日期：115年09月15日 (優化保留架構修飾語句標點+專有名詞彈性中英)');
+    $('appVersion').textContent='版本日期：115/09/16｜功能優化'; $('appVersion').setAttribute('aria-label','版本日期：115年09月16日，功能優化');
   </script>
 </body>
 </html>

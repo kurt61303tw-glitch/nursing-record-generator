@@ -115,12 +115,12 @@
       box-shadow:0 8px 18px rgba(181,68,27,.22);
     }
     .btn-global-ai-toggle, .btn-global-ai-open{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:10px 18px;border-radius:11px;
+      display:inline-flex;align-items:center;gap:9px;
+      padding:11px 20px;border-radius:12px;
       border:1.5px solid #d56f22;
       background:linear-gradient(135deg,#fff8ef 0%,#ffebd6 100%);
       color:#872e0a;
-      font:inherit;font-size:16px;font-weight:800;
+      font:inherit;font-size:18.5px;font-weight:800;
       cursor:pointer;
       box-shadow:0 3px 8px rgba(181,68,27,.12);
       transition:all .18s ease;
@@ -132,7 +132,7 @@
       transform:translateY(-1px);
       box-shadow:0 5px 14px rgba(181,68,27,.22);
     }
-    .btn-global-ai-toggle .ai-sparkle-icon, .btn-global-ai-open .ai-sparkle-icon{font-size:18px;line-height:1}
+    .btn-global-ai-toggle .ai-sparkle-icon, .btn-global-ai-open .ai-sparkle-icon{font-size:21px;line-height:1}
     .workspace{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(420px,.88fr);gap:24px;align-items:start}
     .panel{
       background:rgba(255,253,247,.9);
@@ -471,7 +471,7 @@
       .mode-switch{width:100%;flex-direction:column;align-items:stretch}
       .mode-btn-group{width:100%;display:flex}
       .mode-switch-divider{display:none}
-      .btn-global-ai-toggle{width:100%;justify-content:center}
+      .btn-global-ai-toggle{width:100%;justify-content:center;white-space:normal;text-align:center}
       .mode-btn{flex:1;padding:11px 9px}
       .form-panel{padding:18px}
       .grid{grid-template-columns:1fr}
@@ -513,14 +513,36 @@
     .ai-outer-spinner{width:11px;height:11px;border:2px solid rgba(181,68,27,.25);border-top-color:#b5441b;border-radius:50%;animation:spin .75s linear infinite;display:inline-block;flex:none}
     .ai-outer-progress.is-success .ai-outer-spinner,.ai-outer-progress.is-error .ai-outer-spinner{display:none}
     @keyframes pulseOuterProgress{0%,100%{box-shadow:0 0 0 0 rgba(213,111,34,.35)}50%{box-shadow:0 0 0 4px rgba(213,111,34,.12)}}
-    .global-ai-modal{width:min(740px,calc(100vw - 32px));max-height:min(88vh,900px);padding:0;border:2px solid #d56f22;border-radius:18px;background:#fffdfa;box-shadow:0 24px 75px rgba(62,42,24,.36)}
+    .global-ai-modal{width:min(780px,calc(100vw - 32px));max-height:min(90vh,920px);padding:0;border:2px solid #d56f22;border-radius:18px;background:#fffdfa;box-shadow:0 24px 75px rgba(62,42,24,.36)}
     .global-ai-modal::backdrop{background:rgba(43,34,25,.55)}
-    .global-ai-modal-inner{display:flex;flex-direction:column;max-height:inherit;padding:22px 24px;box-sizing:border-box;overflow-y:auto}
+    .global-ai-modal-inner{display:flex;flex-direction:column;max-height:inherit;padding:24px 26px;box-sizing:border-box;overflow-y:auto}
     .global-ai-modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid #ead9c3}
     .global-ai-modal-title-group{display:flex;flex-direction:column;gap:5px}
-    .global-ai-modal-title-group h3{margin:0;color:var(--forest-2);font-size:21px;font-weight:850;letter-spacing:.02em}
+    .global-ai-modal-title-group h3{margin:0;color:var(--forest-2);font-size:24px;font-weight:850;letter-spacing:.02em}
+    .global-ai-modal .ai-badge{font-size:14px;padding:4px 10px}
+    .global-ai-modal .ai-key-btn{font-size:15px;padding:6px 12px}
+    .global-ai-modal .guide-close-btn{font-size:24px;width:38px;height:38px}
+    .global-ai-modal .ai-notice-banner{font-size:15.5px;line-height:1.6;padding:11px 15px}
+    .global-ai-modal .ai-notice-icon{font-size:24px}
+    .global-ai-modal .ai-notice-badge{font-size:14.5px;padding:3px 9px}
+    .global-ai-modal .ai-combo-tip{font-size:15.5px;line-height:1.6;padding:11px 15px}
+    .global-ai-modal .ai-combo-tip span{font-size:19px!important}
+    .global-ai-modal .ai-dropzone{padding:14px 16px}
+    .global-ai-modal .ai-dropzone-icon{font-size:28px}
+    .global-ai-modal .ai-dropzone-text strong{font-size:16.5px;margin-bottom:3px}
+    .global-ai-modal .ai-dropzone-text span{font-size:14px;line-height:1.45}
+    .global-ai-modal .ai-clear-files-btn{font-size:15px;padding:8px 13px}
+    .global-ai-modal .ai-file-badge{font-size:12px;padding:2px 0}
+    .global-ai-modal .field-ai-text-wrap label{font-size:15.5px;margin-bottom:7px}
+    .global-ai-modal .field-ai-text-wrap textarea{font-size:16px;line-height:1.55;padding:10px 12px;min-height:90px}
+    .global-ai-modal .ai-analyze-btn{font-size:17px;padding:9px 18px}
+    .global-ai-modal .ai-status-box{padding:12px 15px}
+    .global-ai-modal .ai-status-content strong{font-size:16px}
+    .global-ai-modal .ai-status-content p{font-size:14.5px}
+    .global-ai-modal .ai-progress-percent{font-size:16px}
     .global-ai-modal-actions{display:flex;align-items:center;gap:10px}
     .global-ai-modal-footer{display:flex;justify-content:flex-end;gap:10px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+    .global-ai-modal-footer button{font-size:16px;padding:8px 16px}
     .field-ai-modal{width:min(720px,calc(100vw - 32px));max-height:min(88vh,900px);padding:0;border:2px solid #d56f22;border-radius:18px;background:#fffdfa;box-shadow:0 24px 75px rgba(62,42,24,.36)}
     .field-ai-modal::backdrop{background:rgba(43,34,25,.55)}
     .field-ai-modal-inner{display:flex;flex-direction:column;max-height:inherit;padding:22px 24px;box-sizing:border-box;overflow-y:auto}

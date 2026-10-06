@@ -377,6 +377,8 @@
       border-radius:5px;border:1px solid #f7bb8a;font-weight:800;
     }
     .ai-key-dialog{width:min(580px,calc(100vw - 32px));padding:0;border:1px solid #e1c9aa;border-radius:16px;background:#fffdf8;box-shadow:0 24px 70px rgba(62,42,24,.34)}
+    #apiKeyAuthDialog{width:min(440px,calc(100vw - 32px))!important;max-width:440px!important;box-sizing:border-box!important}
+    #apiKeyAuthDialog .ai-key-dialog-inner{width:100%!important;max-width:100%!important;box-sizing:border-box!important}
     .ai-key-dialog::backdrop{background:rgba(43,34,25,.5)}
     .ai-key-dialog-inner{padding:24px}
     .ai-key-dialog-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid #ead9c3}
@@ -916,7 +918,7 @@
 
       <!-- 金鑰管理密碼驗證彈窗（防暴力破解保護） -->
       <dialog class="ai-key-dialog" id="apiKeyAuthDialog" aria-labelledby="apiKeyAuthTitle">
-        <div class="ai-key-dialog-inner" style="max-width:440px">
+        <div class="ai-key-dialog-inner">
           <div class="ai-key-dialog-head">
             <h3 id="apiKeyAuthTitle">🔒 金鑰設定身分驗證</h3>
             <button type="button" class="guide-close-btn" id="apiKeyAuthCloseBtn" aria-label="關閉" title="關閉">×</button>

@@ -3746,6 +3746,28 @@ ${state.lastRecord}`;
       });
     });
 
+    // 手動輸入的用藥內容屬於使用者原始紀錄：保留科別分組、分號與換行，
+    // 不讓既有 blur 正規化把它們全部改成頓號。AI 自動帶入仍在寫入時完成標準化。
+    document.addEventListener('blur', event => {
+      if (event.target?.id === 'medications') event.stopImmediatePropagation();
+    }, true);
+
+    // 最終輸出也使用手動輸入原文；AI 寫入欄位時已先走 cleanMedicationString，
+    // 因此不影響 AI 的既有統一格式。
+    const buildRecordWithManualMedicationPreserved = buildRecord;
+    buildRecord = () => {
+      const rawMeds = String($('medications')?.value || '');
+      const trimmedMeds = rawMeds.trim();
+      const record = buildRecordWithManualMedicationPreserved();
+      if (!trimmedMeds || trimmedMeds === '無') return record;
+
+      const days = String($('medDays')?.value || '').trim().replace(/\s*天\s*$/, '');
+      const cleanedMeds = cleanMedicationString(rawMeds);
+      const cleanOutput = `口服藥內容（${cleanedMeds}${days ? ` * ${days}天份` : ''}）`;
+      const manualOutput = `口服藥內容（${rawMeds}${days ? ` * ${days}天份` : ''}）`;
+      return record.replace(cleanOutput, manualOutput);
+    };
+
     $('appVersion').textContent='版本日期：115/09/16｜功能優化'; $('appVersion').setAttribute('aria-label','版本日期：115年09月16日，功能優化');
   </script>
 </body>

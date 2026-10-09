@@ -1209,6 +1209,12 @@
         .replace(/[ \t]{2,}/g, ' ')
         .trim();
     };
+    // AI 用藥結果可有多個醫院／科別群組：群組間保留分號，群組內才做既有的藥名與劑量整理。
+    const cleanAiMedicationGroups = str => String(str || '')
+      .split(/[；;\r\n]+/)
+      .map(group => cleanMedicationString(group))
+      .filter(Boolean)
+      .join('；');
     const formatRecordDateTime = value => { const match=String(value||'').match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/); return match ? `${Number(match[1])-1911}/${match[2]}/${match[3]} ${match[4]}:${match[5]}` : normalizeDateToSlash(String(value||'')); };
     const fieldValue = id => { const el=$(id); if(!el) return ''; if(el.value==='其他'){ const other=el.parentElement.querySelector('[data-other-input]'); return (other?.value||'其他').trim() || '其他'; } return el.value.trim(); };
     const display = value => value || '未填寫';
@@ -2397,11 +2403,11 @@
 
 【3. 口服藥內容 (medications) 與天數 (medDays) - 極重要判斷規則】：
 - 僅填入完全確定的用藥，不可添加不確定內容。
-- 用藥排版與間隔規範（絕對不用條列式，直接用「、」間隔）：
-  * 嚴禁使用 1. 2. 3. 等數字條列式，嚴禁換行分行！
-  * 所有口服藥物一律連續排列在同一個段落中，各項藥物之間【一律直接以頓號「、」相隔】！
-- 若佐證資料有醫院與科別，藥物前方保留醫院與科別名稱（不加【】符號）：
-  若病摘或藥袋有明確記載醫院與科別，藥物前方請標註醫院名稱與科別（不用加【】符號，直接以文字呈現，例如：成大醫院 心臟內科 Bokey 100mg 1顆 PO QD、Madopar 250mg 半顆 PO TID；若無醫院科別則直接依序列出藥品），各藥物間以頓號「、」相隔。
+- 用藥排版與科別分組規範（絕對不用數字條列式）：
+  * 同一醫院、同一科別的多種藥物，以頓號「、」相隔。
+  * 不同醫院或不同科別的藥物群組，必須以全形分號「；」相隔；每組都要以「醫院名稱 科別：」開頭。
+  * 例如：成大醫院 心臟內科：Bokey 100mg 1顆 PO QD、Madopar 250mg 半顆 PO TID；成大醫院 神經內科：Levodopa 100mg 1顆 PO TID。
+  * 若原始資料沒有可確認的醫院或科別，不可臆測分組，直接依序列出藥品即可。
 - 用藥核心要素與各劑型（膠囊、顆粒錠劑、水劑藥水、粉劑散劑）精準書寫規範：
   * 每種藥物必須清楚包含：【藥名】、【規格劑量】、【每次劑量與單位】、【使用途徑（PO/SL等）】、【時間頻率（QD/BID/TID/QID/QHS/PRN等）】。
   * 【每次顆粒數／水劑量精準辨識（極重要：可能一次半顆、兩顆，務必如實精準標註）】：
@@ -2566,7 +2572,7 @@
         }
 
         if (isDefiniteText(resultJson.medications)) {
-          $('medications').value = cleanMedicationString(normalizeDateToSlash(resultJson.medications.trim()));
+          $('medications').value = cleanAiMedicationGroups(normalizeDateToSlash(resultJson.medications.trim()));
           filledCount++;
         }
 
@@ -3526,12 +3532,11 @@ ${state.lastRecord}`;
 【離題防呆機制：內容跳出太遠可斟酌不用帶入】：
 若所提供之檔案圖片或文字內容完全沒有口服藥物資訊、或內容跳出太遠（例如純為抽血報告、餐點菜單、收據明細或非藥物文件），AI 請發揮臨床審查智慧，【斟酌切勿強行帶入】，medications 請直接填「無」，medDays 請直接填 ""，絕對不可將非藥物內容強行帶入。
 
-【口服藥內容排版與間隔規範（絕對不用條列式，直接用「、」間隔）】：
-1. 嚴禁使用 1. 2. 3. 等數字條列式，嚴禁換行分行！
-2. 所有口服藥物一律連續排列在同一個段落中，各項藥物之間【一律直接以頓號「、」相隔】！
-
-【若佐證資料有醫院與科別，藥物前方保留醫院與科別名稱（不加【】符號）】：
-若病摘或藥袋有明確記載醫院與科別，藥物前方請標註醫院名稱與科別（不用加【】符號，直接以文字呈現，例如：成大醫院 心臟內科 Bokey 100mg 1顆 PO QD、Madopar 250mg 半顆 PO TID；若無醫院科別則直接依序列出藥名、規格劑量、顆粒數/劑量單位、途徑與頻次），各藥物間以頓號「、」相隔。
+【口服藥內容排版與科別分組規範（絕對不用數字條列式）】：
+1. 同一醫院、同一科別的多種藥物，以頓號「、」相隔。
+2. 不同醫院或不同科別的藥物群組，必須以全形分號「；」相隔；每組都以「醫院名稱 科別：」開頭。
+3. 範例：成大醫院 心臟內科：Bokey 100mg 1顆 PO QD、Madopar 250mg 半顆 PO TID；成大醫院 神經內科：Levodopa 100mg 1顆 PO TID。
+4. 原始資料沒有可確認的醫院或科別時，不可臆測群組，直接依序列出藥名、規格劑量、顆粒數/劑量單位、途徑與頻次即可。
 
 【用藥核心要素與各劑型（膠囊、顆粒錠劑、水劑藥水、粉劑散劑）精準書寫規範】：
 1. 每種藥物必須清楚包含：【藥名】、【規格劑量】、【每次劑量與單位】、【使用途徑（PO/SL等）】、【時間頻率（QD/BID/TID/QID/QHS/PRN等）】。
@@ -3633,7 +3638,7 @@ ${state.lastRecord}`;
           }
         } else if (target === 'medications') {
           if (isDefiniteFieldText(resultJson.medications)) {
-            $('medications').value = cleanMedicationString(normalizeDateToSlash(resultJson.medications.trim()));
+            $('medications').value = cleanAiMedicationGroups(normalizeDateToSlash(resultJson.medications.trim()));
             state.touchedFields.add('medications');
             $('medications').dispatchEvent(new Event('input', { bubbles: true }));
             $('medications').dispatchEvent(new Event('change', { bubbles: true }));
